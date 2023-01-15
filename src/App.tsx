@@ -1,14 +1,14 @@
-import { useState } from "react";
-import { fetchQuotes, Quote } from "./utils";
+import { useEffect, useState } from "react";
+import { fetchQuotes, fetchRandomQuote, Quote } from "./utils";
 import { QuotesList } from "./QuotesList";
+import { SearchBox } from "./SearchBox";
+import { InitialQuote } from "./InitialQuote";
 
 function App() {
   const [quotes, setQuotes] = useState<Quote[] | undefined>([]);
-  const [name, setName] = useState<string>();
   const [error, setError] = useState<string>();
-  const [hover, setHover] = useState<boolean>(false);
 
-  const handleSubmit = () => {
+  const handleSubmit = (name: string | undefined) => {
     if (!name) {
       setError("Please enter a name.");
       return;
@@ -36,38 +36,8 @@ function App() {
       }}
     >
       <h1>Quote Search</h1>
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "row",
-          alignItems: "center",
-          gap: "1rem",
-        }}
-      >
-        <input
-          type="text"
-          style={{
-            fontSize: "1.25rem",
-          }}
-          placeholder="Enter a name"
-          value={name ?? ""}
-          onChange={(e) => setName(e.target.value)}
-        />
-        <button
-          onClick={handleSubmit}
-          style={{
-            backgroundColor: hover ? "lightgray" : "white",
-            border: "1px solid black",
-            borderRadius: "0.5rem",
-            padding: "0.5rem",
-            cursor: "pointer",
-          }}
-          onMouseEnter={() => setHover(true)}
-          onMouseLeave={() => setHover(false)}
-        >
-          Search
-        </button>
-      </div>
+
+      <SearchBox handleSubmit={handleSubmit} />
 
       {(() => {
         if (error) {
@@ -77,11 +47,7 @@ function App() {
           return <p>Loading...</p>;
         }
         if (quotes.length === 0) {
-          return (
-            <div>
-              <h3>Enter a name to search for quotes!</h3>
-            </div>
-          );
+          return <InitialQuote />;
         }
         return <QuotesList quotes={quotes} />;
       })()}

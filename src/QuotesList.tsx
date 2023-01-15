@@ -13,18 +13,18 @@ export const QuotesList: FC<QuotesListProps> = (props) => {
       style={{
         display: "flex",
         flexDirection: "column",
-        maxWidth: "32rem",
+        maxWidth: "24rem",
       }}
     >
       {quotes.map((quote) => {
         return (
           <div
             style={{
+              marginTop: "1rem",
               border: "1px solid black",
               borderRadius: "0.5rem",
-              padding: "1rem",
-              margin: "1rem",
               display: "flex",
+              padding: "1rem",
               flexDirection: "column",
             }}
             key={quote._id}

@@ -23,3 +23,7 @@ export function fetchQuotes(authorName: string): Promise<QuotesResponse> {
     `https://api.quotable.io/search/quotes?query==${authorName}&fields=author`
   ).then((res) => res.json());
 }
+
+export function fetchRandomQuote(): Promise<Quote> {
+  return fetch("https://api.quotable.io/random").then((res) => res.json());
+}
