@@ -18,12 +18,14 @@ export interface QuotesResponse {
   results: Quote[];
 }
 
+const baseUrl = "https://api.quotable.io";
+
 export function fetchQuotes(authorName: string): Promise<QuotesResponse> {
   return fetch(
-    `https://api.quotable.io/search/quotes?query==${authorName}&fields=author`
+    `${baseUrl}/search/quotes?query==${authorName}&fields=author`
   ).then((res) => res.json());
 }
 
 export function fetchRandomQuote(): Promise<Quote> {
-  return fetch("https://api.quotable.io/random").then((res) => res.json());
+  return fetch(`${baseUrl}/random`).then((res) => res.json());
 }

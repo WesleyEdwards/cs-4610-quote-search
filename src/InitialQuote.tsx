@@ -7,6 +7,7 @@ export const InitialQuote: FC = () => {
   const [error, setError] = useState<string | undefined>(undefined);
 
   useEffect(() => {
+    setQuote(undefined)
     fetchRandomQuote()
       .then(setQuote)
       .catch(() => setError("Error loading quote"));
