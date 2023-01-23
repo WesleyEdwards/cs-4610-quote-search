@@ -2,11 +2,9 @@ export interface Quote {
   _id: string;
   content: string;
   author: string;
-  tags: string[];
   authorSlug: string;
   length: number;
-  dateAdded: string;
-  dateModified: string;
+  tags: string[];
 }
 
 export interface QuotesResponse {
@@ -18,12 +16,12 @@ export interface QuotesResponse {
   results: Quote[];
 }
 
-const baseUrl = "https://api.quotable.io";
+const baseUrl = "https://usu-quotes-mimic.vercel.app/api";
 
 export function fetchQuotes(authorName: string): Promise<QuotesResponse> {
-  return fetch(
-    `${baseUrl}/search/quotes?query==${authorName}&fields=author`
-  ).then((res) => res.json());
+  return fetch(`${baseUrl}/search?query==${authorName}`).then((res) =>
+    res.json()
+  );
 }
 
 export function fetchRandomQuote(): Promise<Quote> {
